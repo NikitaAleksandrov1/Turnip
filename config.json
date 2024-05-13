@@ -1,0 +1,13 @@
+{
+    "Items": [
+        { "Name": "Turnip", "RequiredPowerToExtract": 21 }
+    ],
+    "JsonCharacters": [
+        { "Name": "Grandfather", "Power": 6, "CanPlant": true },
+        { "Name": "Grandmother", "Power": 5, "CanPlant": true },
+        { "Name": "Granddaughter", "Power": 4, "CanPlant": true },
+        { "Name": "Dog", "Power": 3, "CanPlant": false },
+        { "Name": "Cat", "Power": 2, "CanPlant": false },
+        { "Name": "Mouse", "Power": 1, "CanPlant": false }
+    ]
+}
