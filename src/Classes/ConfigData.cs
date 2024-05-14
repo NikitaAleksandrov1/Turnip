@@ -1,5 +1,5 @@
 public class ConfigData
 {
-    public Item[] Items { get; set; }
+    public Fruit[] Items { get; set; }
     public JsonCharacter[] JsonCharacters { get; set; }
 }

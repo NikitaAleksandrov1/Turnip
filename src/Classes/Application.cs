@@ -1,15 +1,15 @@
 public class Application
 {
-    private IConfig _config;
-    private ISelector _selector;
+    private Config _config;
+    private Selector _selector;
 
-    private Item itemToExtract = null;
+    private Fruit itemToExtract = null;
     private Character[] _characters = null;
 
     private Human _selectedGardener;
 
 
-    public Application(IConfig config, ISelector selector)
+    public Application(Config config, Selector selector)
     {
         _config = config;
         _selector = selector;
@@ -17,10 +17,10 @@ public class Application
 
     
 
-    private (Item, Character[], Human) GetUserInputs()
+    private (Fruit, Character[], Human) GetUserInputs()
     {   
         Human selectedGardener = null;
-        Item itemToExtract = null;
+        Fruit itemToExtract = null;
         _characters = _config.Characters.ToArray();
 
         Human[] _gardeners = Array.FindAll(_config.Characters, character => character is Human).Cast<Human>().ToArray();       
@@ -36,7 +36,7 @@ public class Application
         )).ToArray());
 
         _selector.DisplaySelectOptions("Choose item to extract:", _config.Items.Select(item =>
-        (item.Name, (Action)(() => { itemToExtract = new Item(item.RequiredPowerToExtract, item.Name); })
+        (item.Name, (Action)(() => { itemToExtract = new Fruit(item.RequiredPowerToExtract, item.Name); })
         )).ToArray());
 
         return (itemToExtract, _characters, selectedGardener);

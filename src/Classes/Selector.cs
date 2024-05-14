@@ -1,4 +1,4 @@
-public class Selector : ISelector {
+public class Selector {
     public void DisplaySelectOptions(string message, (string Name, Action Function)[] options)
     {
         Console.WriteLine(message);

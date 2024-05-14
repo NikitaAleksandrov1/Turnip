@@ -1,8 +1,8 @@
-public class Item {
+public class Fruit {
     public float RequiredPowerToExtract {get; set; }
     public string Name { get; }
 
-    public Item(float power, string name)
+    public Fruit(float power, string name)
     {
         this.RequiredPowerToExtract = power;
         this.Name = name;
@@ -13,8 +13,8 @@ public class Item {
         return power >= RequiredPowerToExtract;
     }
 
-    public void Plant()
+    public void Grow()
     {
-        Console.WriteLine("The seed has been planted.");
+        Console.WriteLine($"{Name} has grown.");
     }
 }

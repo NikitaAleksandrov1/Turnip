@@ -4,8 +4,8 @@ class Hello
 {
     static void Main()
     {
-        IConfig config = new Config("config.json");
-        ISelector selector = new Selector();
+        Config config = new Config("config.json");
+        Selector selector = new Selector();
 
         Application app = new Application(config, selector);
         app.Run();

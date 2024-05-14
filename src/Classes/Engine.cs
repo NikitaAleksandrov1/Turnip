@@ -1,11 +1,11 @@
 class Engine {
-    private Item itemToExtract;
+    private Fruit itemToExtract;
     private Character[] _characters;
 
     private Human _selectedGardener;
 
     public Engine(
-        Item itemToExtract,
+        Fruit itemToExtract,
         Character[] characters,
         Human selectedGardener
     )
@@ -18,33 +18,55 @@ class Engine {
     public void Execute()
     {   
         _selectedGardener.Plant(itemToExtract);
+        itemToExtract.Grow();
 
-        float totalPower = 0;
+        List<Character> activeCharacters = [];
+
+        if (_characters.Length == 0)
+        {
+            Console.WriteLine("No characters to pull the item");
+            return;
+        }
 
         for (int i = 0; i < _characters.Length; i++)
-        {
-            totalPower += _characters[i].Pull();
+        { 
+            activeCharacters.Add(_characters[i]);
+            bool result = TryToExtract(activeCharacters, itemToExtract);
 
+            if (result) return;
 
-            string[] previousCharacters = [];
-
-            for (int j = 0; j <= i; j++)
-            {
-                previousCharacters = previousCharacters.Concat(new[] { _characters[j].Name
-                    }).ToArray();
-            }
-            string result = string.Join(" pulling for ", previousCharacters);
-            Console.Write($"{result} are pulling {itemToExtract.Name} from the ground");
-
-            if (itemToExtract.IsExtractable(totalPower) == false)
-            {
-                Console.WriteLine("\nCan't pull it");
-            }
-            else
-            {
-                Console.WriteLine($"\n{itemToExtract.Name} has been extracted successfully");
+            if (i + 1 == _characters.Length) {
+                Console.WriteLine("THE END");
                 return;
             }
+
+            _characters[i].Call(_characters[i + 1]);
         }
+    }
+
+    private bool TryToExtract(List<Character> activeCharacters, Fruit itemToExtract)
+    {
+        float totalPower = 0;
+
+        for (int i = activeCharacters.Count - 1; i >= 0; i--)
+        {
+           
+
+            if (i == 0) {
+                totalPower += activeCharacters[i].Pull(itemToExtract);
+                 if (itemToExtract.IsExtractable(totalPower))
+                {
+                Console.WriteLine($"{itemToExtract.Name} has been extracted successfully");
+                return true;
+                }
+                Console.WriteLine("Can't pull it");
+                return false;
+            }
+                
+            totalPower += activeCharacters[i].Pull(activeCharacters[i - 1]);
+            
+        }
+
+        return false;
     }
 }
